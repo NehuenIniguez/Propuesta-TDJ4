@@ -176,6 +176,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   jugador: {fileID: 0}
-  distanciaSeguir: 3
+  distanciaSeguir: 2
   velocidadSeguir: 2
   siguiendo: 0
