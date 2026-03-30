@@ -13,7 +13,7 @@ public class Stats : MonoBehaviour
     public Slider sedSlider;
     public float sedActual = 0f;
     public float maxSed = 100f;
-    public float velocidadSubidaSed = 3f;
+    public float velocidadSubidaSed = 1f;
 
     void Start()
     {
