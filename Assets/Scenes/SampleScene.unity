@@ -261,6 +261,8 @@ MonoBehaviour:
   panelDialogo: {fileID: 1946997030}
   textoDialogo: {fileID: 1244813569}
   tiempoVisible: 4
+  velocidadEscritura: 0.05
+  tiempoEsperaFinal: 2
 --- !u!4 &239822606
 Transform:
   m_ObjectHideFlags: 0
@@ -2758,7 +2760,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1946997031
 RectTransform:
   m_ObjectHideFlags: 0
