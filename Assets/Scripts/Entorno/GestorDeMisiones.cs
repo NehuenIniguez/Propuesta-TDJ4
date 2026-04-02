@@ -1,16 +1,26 @@
+using System.Collections;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class GestorDeMisiones : MonoBehaviour
 {
-   // --- ESTADOS DE LA MISIÓN ---
+    // --- ESTADOS DE LA MISIÓN ---
     public enum EstadoMision { NoEmpezada, EnProgreso, EsperandoPago, Finalizada }
     public EstadoMision estadoActual = EstadoMision.NoEmpezada;
 
-    // --- REFERENCIAS A OBJETOS ---
+    [Header("Referencias de Objetos")]
     public GameObject vaca;            // Objeto de la vaca en la escena
     public GameObject zonaCorral;      // Objeto que detecta la vaca en el corral
-    public Text textoMisionUI;         // Opcional: Para mostrar la tarea en pantalla
+    public TextMeshProUGUI textoMisionUI;         // Opcional: Para mostrar la tarea en pantalla
+
+    [Header("Sistema de Diálogos")]
+    public GameObject panelDialogo;    // El objeto que vas a activar/desactivar
+    public TextMeshProUGUI textoDialogo; // El texto que está DENTRO del panel
+    public float tiempoVisible = 4f;   // Cuánto tiempo dura el mensaje antes de irse
+    public float velocidadEscritura = 0.03f; // Tiempo entre cada letra
+    public float tiempoEsperaFinal = 2f;    // Cuánto se queda el texto al terminar de escribir
+    private Coroutine corrutinaEscritura;
 
     // --- REFERENCIA AL GAUCHO (JUGADOR) ---
     private Movement movimientoJugador; // Reemplaza 'PlayerMovement' por el nombre de TU script de movimiento
@@ -58,7 +68,7 @@ public class GestorDeMisiones : MonoBehaviour
         // Aquí podrías mover la vaca a una posición inicial específica:
         // vaca.transform.position = transform.position + Vector3.right * 2;
         
-        Conversacion("¡Ey gaucho! Necesito que lleves esa vaca de allá al corral. ¡Apurate!");
+        Conversacion("¡Eh Tucumano! Necesito que lleves esa vaca de allá al corral. ¡Apurate!");
         ActualizarTextoUI("Lleva la vaca al corral");
     }
 
@@ -72,8 +82,8 @@ public class GestorDeMisiones : MonoBehaviour
         // Aquí sumarías las monedas/pesos a la variable de dinero del gaucho
         // Ejemplo: GauchoStats.dinero += 100;
 
-        Conversacion("¡Excelente trabajo! Aquí tienes tu paga. ¡A disfrutar la noche en la taberna!");
-        ActualizarTextoUI("Misión Completada - Ve a la Taberna");
+        Conversacion("¡Excelente trabajo! Aquí tienes tu paga. ¡A disfrutar la noche en la Pulperia!");
+        ActualizarTextoUI("Misión Completada - Ve a la Pulperia");
     }
 
     // --- DETECCIÓN DE TAREA COMPLETADA (Se llama desde el Corral) ---
@@ -84,7 +94,7 @@ public class GestorDeMisiones : MonoBehaviour
         {
             estadoActual = EstadoMision.EsperandoPago;
             // Podrías detener el seguimiento de la vaca al gaucho aquí si lo tienes implementado
-            Conversacion("¡Listo! La vaca está adentro. Vuelve a hablar con el Capataz para cobrar.");
+            //Conversacion("¡Listo! La vaca está adentro. Vuelve a hablar con el Capataz para cobrar.");
             ActualizarTextoUI("Vuelve con el Capataz por tu paga");
         }
     }
@@ -93,11 +103,34 @@ public class GestorDeMisiones : MonoBehaviour
 
     void Conversacion(string mensaje)
     {
-        // Aquí podrías implementar tu sistema de diálogos completo.
-        // Por ahora, lo mostramos en la consola de Unity.
-        Debug.Log("CAPATAZ: " + mensaje);
+        // Si ya se está escribiendo algo, lo detenemos para empezar el nuevo
+        if (corrutinaEscritura != null)
+        {
+            StopCoroutine(corrutinaEscritura);
+        }
+        
+        corrutinaEscritura = StartCoroutine(EscribirMensaje(mensaje));
     }
+    IEnumerator EscribirMensaje(string mensaje)
+    {
+        // 1. Limpiamos el texto y activamos el panel
+        textoDialogo.text = "";
+        panelDialogo.SetActive(true);
 
+        // 2. Recorremos el mensaje letra por letra
+        foreach (char letra in mensaje.ToCharArray())
+        {
+            textoDialogo.text += letra;
+            // Esperamos un poquito antes de la siguiente letra
+            yield return new WaitForSeconds(velocidadEscritura);
+        }
+
+        // 3. Una vez terminado, esperamos un tiempo para que el jugador lea
+        yield return new WaitForSeconds(tiempoEsperaFinal);
+
+        // 4. Desaparece el cartel
+        panelDialogo.SetActive(false);
+    }
     void ActualizarTextoUI(string mensaje)
     {
         if (textoMisionUI != null)
