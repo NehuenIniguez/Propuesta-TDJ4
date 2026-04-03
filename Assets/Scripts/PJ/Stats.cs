@@ -51,6 +51,10 @@ public class Stats : MonoBehaviour
         {
             TomarAlcohol(20f, 30f);
         }
+        if (sedActual == maxSed)
+        {
+            Time.timeScale = 0f; // Detiene el juego si la sed llega al máximo
+        }
     }
 
     // 🍺 Alcohol

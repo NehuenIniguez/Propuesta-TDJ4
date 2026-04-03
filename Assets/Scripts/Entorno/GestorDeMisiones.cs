@@ -1,6 +1,8 @@
 using System.Collections;
 using TMPro;
+using UnityEditor.SearchService;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class GestorDeMisiones : MonoBehaviour
@@ -84,6 +86,7 @@ public class GestorDeMisiones : MonoBehaviour
 
         Conversacion("¡Excelente trabajo! Aquí tienes tu paga. ¡A disfrutar la noche en la Pulperia!");
         ActualizarTextoUI("Misión Completada - Ve a la Pulperia");
+        SceneManager.LoadScene("Pulperia"); // Cambia "Pulperia" por el nombre exacto de tu escena de la pulpería
     }
 
     // --- DETECCIÓN DE TAREA COMPLETADA (Se llama desde el Corral) ---
