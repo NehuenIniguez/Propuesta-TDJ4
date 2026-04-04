@@ -21,9 +21,12 @@ public class GestorDeMisiones : MonoBehaviour
     public TextMeshProUGUI textoDialogo; // El texto que está DENTRO del panel
     public float tiempoVisible = 4f;   // Cuánto tiempo dura el mensaje antes de irse
     public float velocidadEscritura = 0.03f; // Tiempo entre cada letra
-    public float tiempoEsperaFinal = 2f;    // Cuánto se queda el texto al terminar de escribir
+    public float tiempoEsperaFinal = 3f;    // Cuánto se queda el texto al terminar de escribir
     private Coroutine corrutinaEscritura;
 
+    [Header("Economía")]
+    public int pagoPorMision = 100;
+    private Stats statsJugador; // Referencia al script de Stats
     // --- REFERENCIA AL GAUCHO (JUGADOR) ---
     private Movement movimientoJugador; // Reemplaza 'PlayerMovement' por el nombre de TU script de movimiento
 
@@ -38,6 +41,7 @@ public class GestorDeMisiones : MonoBehaviour
         if (jugador != null)
         {
             movimientoJugador = jugador.GetComponent<Movement>();
+            statsJugador = jugador.GetComponent<Stats>();
         }
     }
 
@@ -70,7 +74,7 @@ public class GestorDeMisiones : MonoBehaviour
         // Aquí podrías mover la vaca a una posición inicial específica:
         // vaca.transform.position = transform.position + Vector3.right * 2;
         
-        Conversacion("¡Eh Tucumano! Necesito que lleves esa vaca de allá al corral. ¡Apurate!");
+        Conversacion("¡Eh, Tucumano! Necesito que lleves esa vaca de allá al corral. ¡Apurate!");
         ActualizarTextoUI("Lleva la vaca al corral");
     }
 
@@ -81,12 +85,19 @@ public class GestorDeMisiones : MonoBehaviour
         vaca.SetActive(false); 
         
         // --- LÓGICA DE PAGO ---
-        // Aquí sumarías las monedas/pesos a la variable de dinero del gaucho
-        // Ejemplo: GauchoStats.dinero += 100;
+        if (statsJugador != null)
+        {
+            // Llamamos a la función de Stats para sumar dinero y actualizar la UI
+            statsJugador.ModificarDinero(pagoPorMision);
+        }
 
-        Conversacion("¡Excelente trabajo! Aquí tienes tu paga. ¡A disfrutar la noche en la Pulperia!");
-        ActualizarTextoUI("Misión Completada - Ve a la Pulperia");
-        SceneManager.LoadScene("Pulperia"); // Cambia "Pulperia" por el nombre exacto de tu escena de la pulpería
+        Conversacion("¡Excelente trabajo! Aquí tenés tus $" + pagoPorMision + ". ¡Andá a la Pulperia!");
+        ActualizarTextoUI("Misión Completada");
+
+        // Esperamos un poco y cambiamos de escena
+        Invoke("IrALaPulperia", tiempoEsperaFinal + 1f);
+
+        
     }
 
     // --- DETECCIÓN DE TAREA COMPLETADA (Se llama desde el Corral) ---
@@ -96,8 +107,7 @@ public class GestorDeMisiones : MonoBehaviour
         if (estadoActual == EstadoMision.EnProgreso)
         {
             estadoActual = EstadoMision.EsperandoPago;
-            // Podrías detener el seguimiento de la vaca al gaucho aquí si lo tienes implementado
-            //Conversacion("¡Listo! La vaca está adentro. Vuelve a hablar con el Capataz para cobrar.");
+          
             ActualizarTextoUI("Vuelve con el Capataz por tu paga");
         }
     }
@@ -140,5 +150,9 @@ public class GestorDeMisiones : MonoBehaviour
         {
             textoMisionUI.text = mensaje;
         }
+    }
+    void IrALaPulperia()
+    {
+        SceneManager.LoadScene("Pulperia");
     }
 }

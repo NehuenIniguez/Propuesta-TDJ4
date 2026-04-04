@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -15,8 +16,19 @@ public class Stats : MonoBehaviour
     public float maxSed = 100f;
     public float velocidadSubidaSed = 1f;
 
+    [Header("Dinero")]
+    public int dineroActual = 0;
+    public TextMeshProUGUI textoDineroUI;
+
     void Start()
     {
+        // --- CORRECCIÓN AQUÍ ---
+        // 1. Recuperamos el dinero guardado (si no hay nada, pone 0)
+        dineroActual = PlayerPrefs.GetInt("DineroGaucho", 0);
+        
+        // 2. Actualizamos el texto visualmente apenas arranca el juego
+        ActualizarTextoDinero();
+        
         // Ebriedad
         ebriedadActual = 0f;
         ebriedadSlider.maxValue = maxEbriedad;
@@ -70,6 +82,26 @@ public class Stats : MonoBehaviour
         sedSlider.value = sedActual;
     }
 
-    // 💧 Agua
+    // --- LÓGICA DE DINERO ---
+
+    public void ActualizarTextoDinero()
+    {
+        if (textoDineroUI != null)
+        {
+            // Mostramos el símbolo de peso y el número
+            textoDineroUI.text = dineroActual.ToString();
+        }
+    }
+
+    // Método para cuando ganes o gastes plata
+    public void ModificarDinero(int cantidad)
+    {
+        dineroActual += cantidad;
+        // Guardamos para que sea persistente
+        PlayerPrefs.SetInt("DineroGaucho", dineroActual);
+        PlayerPrefs.Save();
+        
+        ActualizarTextoDinero();
+    }
     
 }
