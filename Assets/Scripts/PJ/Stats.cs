@@ -22,9 +22,9 @@ public class Stats : MonoBehaviour
 
     void Start()
     {
-        // --- CORRECCIÓN AQUÍ ---
-        // 1. Recuperamos el dinero guardado (si no hay nada, pone 0)
-        dineroActual = PlayerPrefs.GetInt("DineroGaucho", 0);
+        // 💰 Traer dinero del PlayerManager
+        dineroActual = PlayerManager.instance.dinero;
+        ActualizarTextoDinero();
         
         // 2. Actualizamos el texto visualmente apenas arranca el juego
         ActualizarTextoDinero();
@@ -82,25 +82,21 @@ public class Stats : MonoBehaviour
         sedSlider.value = sedActual;
     }
 
-    // --- LÓGICA DE DINERO ---
-
+     // 💰 UI Dinero
     public void ActualizarTextoDinero()
     {
         if (textoDineroUI != null)
         {
-            // Mostramos el símbolo de peso y el número
             textoDineroUI.text = dineroActual.ToString();
         }
     }
 
-    // Método para cuando ganes o gastes plata
+    // 💰 Modificar dinero (usa PlayerManager)
     public void ModificarDinero(int cantidad)
     {
-        dineroActual += cantidad;
-        // Guardamos para que sea persistente
-        PlayerPrefs.SetInt("DineroGaucho", dineroActual);
-        PlayerPrefs.Save();
-        
+        PlayerManager.instance.ModificarDinero(cantidad);
+
+        dineroActual = PlayerManager.instance.dinero;
         ActualizarTextoDinero();
     }
     
