@@ -81,6 +81,14 @@ public class Stats : MonoBehaviour
         ebriedadSlider.value = ebriedadActual;
         sedSlider.value = sedActual;
     }
+    // 💧 Agua
+    public void TomarAgua(float reduccionSed)
+    {
+        sedActual -= reduccionSed;
+        sedActual = Mathf.Clamp(sedActual, 0, maxSed);
+
+        sedSlider.value = sedActual;
+    }
 
      // 💰 UI Dinero
     public void ActualizarTextoDinero()
