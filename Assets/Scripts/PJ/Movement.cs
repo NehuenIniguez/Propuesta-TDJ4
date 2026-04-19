@@ -18,26 +18,45 @@ public class Movement : MonoBehaviour
 
     void Update()
     {
-        // Solo leemos input acá
         moveHorizontal = Input.GetAxis("Horizontal");
         moveVertical = Input.GetAxis("Vertical");
     }
 
     void FixedUpdate()
     {
-        float multiplicador = 1f;
+        float ebriedad = statsPJ.GetPorcentajeEbriedad();
 
-        // 🧠 Estados según ebriedad
-        if (statsPJ.ebriedadActual >= 30f && statsPJ.ebriedadActual < 70f)
+        float velocidadFinal = speed;
+        Vector2 input = new Vector2(moveHorizontal, moveVertical);
+
+        // 🟢 SOBRIO
+        //if (ebriedad < 0.3f)
+        //{
+        // normal
+        //}
+        // 🟡 ENTONADO (zona óptima)
+        if (ebriedad < 0.6f)
         {
-            multiplicador = 0.75f;
+            velocidadFinal *= 1.2f; // más rápido
         }
-        else if (statsPJ.ebriedadActual >= 70f)
+        // 🟠 BORRACHO
+        else if (ebriedad < 0.8f)
         {
-            multiplicador = -0.5f; // invertido + más lento
+            velocidadFinal *= 1.4f;
+
+            // ruido en el movimiento (pierde precisión)
+            input += Random.insideUnitCircle * 0.3f;
+        }
+        // 🔴 MUY BORRACHO
+        else
+        {
+            velocidadFinal *= 1.6f;
+
+            // control caótico
+            input += Random.insideUnitCircle * 0.6f;
         }
 
-        Vector2 movimiento = new Vector2(moveHorizontal, moveVertical) * speed * multiplicador;
+        Vector2 movimiento = input.normalized * velocidadFinal;
 
         rb2D.linearVelocity = movimiento;
     }

@@ -22,54 +22,51 @@ public class Stats : MonoBehaviour
 
     void Start()
     {
-        // 💰 Traer dinero del PlayerManager
         dineroActual = PlayerManager.instance.dinero;
         ActualizarTextoDinero();
-        
-        // 2. Actualizamos el texto visualmente apenas arranca el juego
-        ActualizarTextoDinero();
-        
-        // Ebriedad
+
         ebriedadActual = 0f;
         ebriedadSlider.maxValue = maxEbriedad;
-        ebriedadSlider.value = ebriedadActual;
 
-        // Sed
         sedActual = 0f;
         sedSlider.maxValue = maxSed;
-        sedSlider.value = sedActual;
+
+        ActualizarUI();
     }
 
     void Update()
     {
-        // 🍺 Ebriedad baja sola
         if (ebriedadActual > 0)
         {
             ebriedadActual -= velocidadBajadaEbriedad * Time.deltaTime;
             ebriedadActual = Mathf.Clamp(ebriedadActual, 0, maxEbriedad);
-            ebriedadSlider.value = ebriedadActual;
         }
 
-        // 💧 Sed sube sola
         if (sedActual < maxSed)
         {
             sedActual += velocidadSubidaSed * Time.deltaTime;
             sedActual = Mathf.Clamp(sedActual, 0, maxSed);
-            sedSlider.value = sedActual;
         }
 
-        // 🔧 TEST
         if (Input.GetKeyDown(KeyCode.E))
         {
             TomarAlcohol(20f, 30f);
         }
-        if (sedActual == maxSed)
+
+        if (sedActual >= maxSed)
         {
-            Time.timeScale = 0f; // Detiene el juego si la sed llega al máximo
+            Time.timeScale = 0f;
         }
+
+        ActualizarUI();
     }
 
-    // 🍺 Alcohol
+    void ActualizarUI()
+    {
+        ebriedadSlider.value = ebriedadActual;
+        sedSlider.value = sedActual;
+    }
+
     public void TomarAlcohol(float aumentoEbriedad, float reduccionSed)
     {
         ebriedadActual += aumentoEbriedad;
@@ -78,19 +75,20 @@ public class Stats : MonoBehaviour
         ebriedadActual = Mathf.Clamp(ebriedadActual, 0, maxEbriedad);
         sedActual = Mathf.Clamp(sedActual, 0, maxSed);
 
-        ebriedadSlider.value = ebriedadActual;
-        sedSlider.value = sedActual;
+        ActualizarUI();
     }
-    // 💧 Agua
-    public void TomarAgua(float reduccionSed)
+
+    public void TomarAgua(float reduccionSed, float reduccionEbriedad)
     {
         sedActual -= reduccionSed;
-        sedActual = Mathf.Clamp(sedActual, 0, maxSed);
+        ebriedadActual -= reduccionEbriedad;
 
-        sedSlider.value = sedActual;
+        sedActual = Mathf.Clamp(sedActual, 0, maxSed);
+        ebriedadActual = Mathf.Clamp(ebriedadActual, 0, maxEbriedad);
+
+        ActualizarUI();
     }
 
-     // 💰 UI Dinero
     public void ActualizarTextoDinero()
     {
         if (textoDineroUI != null)
@@ -99,13 +97,17 @@ public class Stats : MonoBehaviour
         }
     }
 
-    // 💰 Modificar dinero (usa PlayerManager)
     public void ModificarDinero(int cantidad)
     {
         PlayerManager.instance.ModificarDinero(cantidad);
 
         dineroActual = PlayerManager.instance.dinero;
         ActualizarTextoDinero();
+    }
+
+    public float GetPorcentajeEbriedad()
+    {
+        return ebriedadActual / maxEbriedad;
     }
     
 }

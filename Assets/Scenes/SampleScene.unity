@@ -158,6 +158,8 @@ MonoBehaviour:
   velocidadEscritura: 0.02
   tiempoEsperaFinal: 2
   pagoPorMision: 100
+  tiempoLimite: 30
+  textoTimerUI: {fileID: 1008843387}
 --- !u!4 &239822606
 Transform:
   m_ObjectHideFlags: 0
@@ -960,6 +962,17 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1008843387 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8522297876345017247, guid: 626a547155f210841b04ec374cb72e90, type: 3}
+  m_PrefabInstance: {fileID: 5516102102604950058}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &1244813569 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5799857292401576526, guid: 626a547155f210841b04ec374cb72e90, type: 3}
