@@ -199,12 +199,12 @@ GameObject:
   - component: {fileID: 4023771619231529343}
   - component: {fileID: 8522297876345017247}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: Timer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &8980705554223896539
 RectTransform:
   m_ObjectHideFlags: 0

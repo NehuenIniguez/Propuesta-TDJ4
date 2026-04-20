@@ -74,6 +74,7 @@ public class GestorDeMisiones : MonoBehaviour
 
         if (textoTimerUI != null)
         {
+            textoTimerUI.gameObject.SetActive(misionActiva);
             textoTimerUI.text = "Tiempo: " + Mathf.CeilToInt(tiempoActual);
         
             if (tiempoActual < 10f)
@@ -82,6 +83,14 @@ public class GestorDeMisiones : MonoBehaviour
                 textoTimerUI.color = Color.yellow;
             else
                 textoTimerUI.color = Color.white;
+        }
+
+        if (EstadoMision.NoEmpezada == estadoActual)
+        {
+            if (textoTimerUI != null)
+            {
+                textoTimerUI.gameObject.SetActive(false);
+            }
         }
     }
 
