@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class PulperoTienda : MonoBehaviour
 {
-     [Header("UI")]
+    [Header("UI")]
     public GameObject panelTienda;
 
     [Header("Precios")]
@@ -11,16 +11,30 @@ public class PulperoTienda : MonoBehaviour
     public int precioFacon = 500;
 
     private bool jugadorCerca = false;
+
     private Stats statsJugador;
+    private Inventario inventarioJugador;
 
     void Start()
     {
         panelTienda.SetActive(false);
+
+        // Buscar jugador directamente (NO depender del trigger)
+        GameObject jugador = GameObject.FindGameObjectWithTag("Player");
+
+        if (jugador != null)
+        {
+            statsJugador = jugador.GetComponent<Stats>();
+            inventarioJugador = jugador.GetComponent<Inventario>();
+        }
+        else
+        {
+            Debug.LogError("No se encontró el jugador con tag 'Player'");
+        }
     }
 
     void Update()
     {
-        // Abrir tienda con P
         if (jugadorCerca && Input.GetKeyDown(KeyCode.P))
         {
             if (!panelTienda.activeSelf)
@@ -35,7 +49,6 @@ public class PulperoTienda : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             jugadorCerca = true;
-            statsJugador = other.GetComponent<Stats>();
         }
     }
 
@@ -51,7 +64,7 @@ public class PulperoTienda : MonoBehaviour
     void AbrirTienda()
     {
         panelTienda.SetActive(true);
-        Time.timeScale = 0f; // pausa el juego
+        Time.timeScale = 0f;
     }
 
     void CerrarTienda()
@@ -60,45 +73,69 @@ public class PulperoTienda : MonoBehaviour
         Time.timeScale = 1f;
     }
 
-    // 🛒 BOTONES DE COMPRA
+    // 🛒 COMPRAS
 
     public void ComprarAgua()
     {
+        Debug.Log("Intentando comprar agua");
+
+        if (PlayerManager.instance == null)
+        {
+            Debug.LogError("PlayerManager es NULL");
+            return;
+        }
+
         if (PlayerManager.instance.dinero >= precioAgua)
         {
             PlayerManager.instance.ModificarDinero(-precioAgua);
 
-            if (statsJugador != null)
-                statsJugador.TomarAlcohol(0f, 40f); // baja sed sin ebriedad
-
-            ActualizarUI();
-        }
-    }
-
-   public void ComprarComida()
-    {
-        if (PlayerManager.instance.dinero >= precioComida)
-        {
-            PlayerManager.instance.ModificarDinero(-precioComida);
-
-            Inventario inv = statsJugador.GetComponent<Inventario>();
-
-            if (inv != null)
+            if (inventarioJugador != null)
             {
-                inv.AgregarComida(1);
+                inventarioJugador.AgregarAgua(1);
+                Debug.Log("Agua agregada al inventario");
             }
 
             ActualizarUI();
         }
+        else
+        {
+            Debug.Log("No alcanza el dinero");
+        }
     }
 
-   
+    public void ComprarComida()
+    {
+        Debug.Log("Intentando comprar comida");
+
+        if (PlayerManager.instance == null)
+        {
+            Debug.LogError("PlayerManager es NULL");
+            return;
+        }
+
+        if (PlayerManager.instance.dinero >= precioComida)
+        {
+            PlayerManager.instance.ModificarDinero(-precioComida);
+
+            if (inventarioJugador != null)
+            {
+                inventarioJugador.AgregarComida(1);
+                Debug.Log("Comida agregada al inventario");
+            }
+
+            ActualizarUI();
+        }
+        else
+        {
+            Debug.Log("No alcanza el dinero");
+        }
+    }
 
     void ActualizarUI()
     {
         if (statsJugador != null)
         {
-            statsJugador.ModificarDinero(0); // solo refresca el texto
+            statsJugador.ActualizarTextoDinero();
         }
     }
 }

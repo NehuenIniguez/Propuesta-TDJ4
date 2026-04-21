@@ -57,9 +57,23 @@ public class Stats : MonoBehaviour
         {
             Time.timeScale = 0f;
         }
+        Inventario inv = GetComponent<Inventario>();
 
-        ActualizarUI();
+    if (inv != null)
+    {
+        if (Input.GetKeyDown(KeyCode.Y))
+        {
+            inv.UsarAgua();
+        }
+
+        if (Input.GetKeyDown(KeyCode.X))
+        {
+            inv.UsarComida();
+        }
     }
+            ActualizarUI();
+    }  
+    
 
     void ActualizarUI()
     {

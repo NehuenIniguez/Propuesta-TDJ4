@@ -243,6 +243,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &136039296 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6076345406497140462, guid: 626a547155f210841b04ec374cb72e90, type: 3}
+  m_PrefabInstance: {fileID: 136039294}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &136039297 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8382650719603888245, guid: 626a547155f210841b04ec374cb72e90, type: 3}
@@ -263,6 +274,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &136039299 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4277764415245135739, guid: 626a547155f210841b04ec374cb72e90, type: 3}
+  m_PrefabInstance: {fileID: 136039294}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &183895243
@@ -1414,7 +1436,7 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 32767
   m_TargetDisplay: 0
 --- !u!224 &1336575509
 RectTransform:
@@ -1854,7 +1876,7 @@ MonoBehaviour:
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+    m_PressedColor: {r: 0, g: 0, b: 0, a: 1}
     m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
     m_ColorMultiplier: 1
@@ -2038,7 +2060,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -30}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1668517646
@@ -2174,7 +2196,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -30}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1795591154
@@ -2432,6 +2454,14 @@ PrefabInstance:
       propertyPath: ebriedadSlider
       value: 
       objectReference: {fileID: 136039298}
+    - target: {fileID: 3242033324426886314, guid: ed846834c14481f4c9238817d11b0a8d, type: 3}
+      propertyPath: textoAgua
+      value: 
+      objectReference: {fileID: 136039299}
+    - target: {fileID: 3242033324426886314, guid: ed846834c14481f4c9238817d11b0a8d, type: 3}
+      propertyPath: textoComida
+      value: 
+      objectReference: {fileID: 136039296}
     - target: {fileID: 3390125821487061803, guid: ed846834c14481f4c9238817d11b0a8d, type: 3}
       propertyPath: m_LocalPosition.x
       value: 3.1

@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using TMPro;
 
 public class Inventario : MonoBehaviour
 {
@@ -8,19 +9,26 @@ public class Inventario : MonoBehaviour
 
     private Stats stats;
 
+    [Header("UI")]
+    public TextMeshProUGUI textoAgua;
+    public TextMeshProUGUI textoComida;
+
     void Start()
     {
         stats = GetComponent<Stats>();
+        ActualizarUI(); // 🔥 importante al iniciar
     }
 
     public void AgregarAgua(int cantidad)
     {
         agua += cantidad;
+        ActualizarUI();
     }
 
     public void AgregarComida(int cantidad)
     {
         comida += cantidad;
+        ActualizarUI();
     }
 
     // 💧 AGUA
@@ -30,9 +38,9 @@ public class Inventario : MonoBehaviour
         {
             agua--;
 
-            // baja sed y ebriedad (ajustá valores después)
             stats.TomarAgua(40f, 25f);
 
+            ActualizarUI();
             return true;
         }
         return false;
@@ -47,6 +55,7 @@ public class Inventario : MonoBehaviour
 
             StartCoroutine(BuffComida());
 
+            ActualizarUI();
             return true;
         }
         return false;
@@ -56,12 +65,24 @@ public class Inventario : MonoBehaviour
     {
         float original = stats.velocidadBajadaEbriedad;
 
-        // mejora temporal
         stats.velocidadBajadaEbriedad += 3f;
 
         yield return new WaitForSeconds(10f);
 
-        // vuelve a la normalidad
         stats.velocidadBajadaEbriedad = original;
+    }
+
+    // 🧠 UI
+    void ActualizarUI()
+    {
+        if (textoAgua != null)
+        {
+            textoAgua.text = "Agua: " + agua;
+        }
+
+        if (textoComida != null)
+        {
+            textoComida.text = "Comida: " + comida;
+        }
     }
 }

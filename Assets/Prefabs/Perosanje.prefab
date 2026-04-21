@@ -17,6 +17,7 @@ GameObject:
   - component: {fileID: 8327390028253873035}
   - component: {fileID: 668769257486318660}
   - component: {fileID: 6368482160297167828}
+  - component: {fileID: 3242033324426886314}
   m_Layer: 3
   m_Name: Perosanje
   m_TagString: Player
@@ -269,3 +270,19 @@ MonoBehaviour:
   suavizado: 5
   velocidadPulso: 3
   fuerzaPulso: 0.05
+--- !u!114 &3242033324426886314
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7299207466443538561}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4d8297b4b8973934cb94200c590604db, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  agua: 0
+  comida: 0
+  textoAgua: {fileID: 0}
+  textoComida: {fileID: 0}

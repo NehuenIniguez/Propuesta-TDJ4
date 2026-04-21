@@ -28,9 +28,17 @@ public class PlayerManager : MonoBehaviour
     public void ModificarDinero(int cantidad)
     {
         dinero += cantidad;
-
+    
         PlayerPrefs.SetInt("DineroGaucho", dinero);
         PlayerPrefs.Save();
+    
+        // 🔥 ACTUALIZAR UI
+        Stats stats = FindObjectOfType<Stats>();
+        if (stats != null)
+        {
+            stats.dineroActual = dinero;
+            stats.ActualizarTextoDinero();
+        }
     }
 
     public void ComprarFacon(int precio)

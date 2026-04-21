@@ -1884,6 +1884,28 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 626a547155f210841b04ec374cb72e90, type: 3}
+--- !u!114 &5516102102604950059 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6076345406497140462, guid: 626a547155f210841b04ec374cb72e90, type: 3}
+  m_PrefabInstance: {fileID: 5516102102604950058}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &5516102102604950060 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4277764415245135739, guid: 626a547155f210841b04ec374cb72e90, type: 3}
+  m_PrefabInstance: {fileID: 5516102102604950058}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &7785035627064072243
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1904,6 +1926,14 @@ PrefabInstance:
       propertyPath: ebriedadSlider
       value: 
       objectReference: {fileID: 1502909192}
+    - target: {fileID: 3242033324426886314, guid: ed846834c14481f4c9238817d11b0a8d, type: 3}
+      propertyPath: textoAgua
+      value: 
+      objectReference: {fileID: 5516102102604950060}
+    - target: {fileID: 3242033324426886314, guid: ed846834c14481f4c9238817d11b0a8d, type: 3}
+      propertyPath: textoComida
+      value: 
+      objectReference: {fileID: 5516102102604950059}
     - target: {fileID: 3390125821487061803, guid: ed846834c14481f4c9238817d11b0a8d, type: 3}
       propertyPath: m_LocalPosition.x
       value: -3.46
