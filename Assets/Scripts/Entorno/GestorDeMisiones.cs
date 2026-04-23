@@ -131,40 +131,55 @@ public class GestorDeMisiones : MonoBehaviour
 
     void RecibirPago()
     {
-        estadoActual = EstadoMision.Finalizada;
-        misionActiva = false;
+         estadoActual = EstadoMision.Finalizada;
+    misionActiva = false;
 
-        vaca.SetActive(false);
+    vaca.SetActive(false);
 
-        int pagoFinal = pagoPorMision;
+    int pagoFinal = pagoPorMision;
+    int confianzaGanada = 10; // base
 
-        if (statsJugador != null)
+    if (statsJugador != null)
+    {
+        float ebriedad = statsJugador.GetPorcentajeEbriedad();
+
+        // 🟠 Borracho → menos pago y menos confianza
+        if (ebriedad >= 0.5f && ebriedad < 0.75f)
         {
-            float ebriedad = statsJugador.GetPorcentajeEbriedad();
-
-            // 🟠 Borracho → menos pago
-            if (ebriedad >= 0.5f && ebriedad < 0.75f)
-            {
-                pagoFinal = Mathf.RoundToInt(pagoPorMision * 0.7f);
-            }
-            // 🔴 Muy borracho → casi nada
-            else if (ebriedad >= 0.75f)
-            {
-                pagoFinal = Mathf.RoundToInt(pagoPorMision * 0.3f);
-            }
-
-            statsJugador.ModificarDinero(pagoFinal);
+            pagoFinal = Mathf.RoundToInt(pagoPorMision * 0.7f);
+            confianzaGanada = 5;
+        }
+        // 🔴 Muy borracho → casi nada y casi sin confianza
+        else if (ebriedad >= 0.75f)
+        {
+            pagoFinal = Mathf.RoundToInt(pagoPorMision * 0.3f);
+            confianzaGanada = 2;
         }
 
-        Conversacion("Trabajo hecho. Cobrás $" + pagoFinal);
-        ActualizarTextoUI("Misión Completada");
+        // ⏱️ BONUS por rapidez
+        float porcentajeTiempo = tiempoActual / tiempoLimite;
 
-        if (textoTimerUI != null)
+        if (porcentajeTiempo > 0.5f)
         {
-            textoTimerUI.text = "";
+            confianzaGanada += 5;
         }
 
-        Invoke("IrALaPulperia", tiempoEsperaFinal + 1f);
+        // 💰 dinero
+        statsJugador.ModificarDinero(pagoFinal);
+
+        // 🤝 confianza
+        PlayerManager.instance.ModificarConfianza(confianzaGanada);
+    }
+
+    Conversacion("Trabajo hecho. Cobrás $" + pagoFinal + " | Confianza +" + confianzaGanada);
+    ActualizarTextoUI("Misión Completada");
+
+    if (textoTimerUI != null)
+    {
+        textoTimerUI.text = "";
+    }
+
+    Invoke("IrALaPulperia", tiempoEsperaFinal + 1f);
     }
 
     // --- DETECCIÓN DE TAREA COMPLETADA (Se llama desde el Corral) ---

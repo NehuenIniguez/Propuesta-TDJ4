@@ -130,6 +130,28 @@ public class PulperoTienda : MonoBehaviour
             Debug.Log("No alcanza el dinero");
         }
     }
+    public void ComprarFacon()
+    {
+        if (PlayerManager.instance.dinero >= precioFacon &&
+            !PlayerManager.instance.tieneFacon &&
+            PlayerManager.instance.confianza >= 50)
+        {
+            PlayerManager.instance.ModificarDinero(-precioFacon);
+            PlayerManager.instance.tieneFacon = true;
+    
+            PlayerPrefs.SetInt("TieneFacon", 1);
+            PlayerPrefs.Save();
+    
+            ActualizarUI();
+    
+            Debug.Log("Compraste el facón");
+        }
+        else
+        {
+            Debug.Log("No cumplís los requisitos (dinero/confianza)");
+        }
+    }
+
 
     void ActualizarUI()
     {

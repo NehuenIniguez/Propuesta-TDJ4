@@ -2,22 +2,25 @@ using UnityEngine;
 
 public class PlayerManager : MonoBehaviour
 {
-    public static PlayerManager instance;
+   public static PlayerManager instance;
 
     public int dinero;
     public bool tieneFacon;
 
+    // 🤝 NUEVO
+    public int confianza;
+
     void Awake()
     {
-        // Singleton
         if (instance == null)
         {
             instance = this;
             DontDestroyOnLoad(gameObject);
 
-            // Cargar datos guardados
+            // 💾 Cargar datos
             dinero = PlayerPrefs.GetInt("DineroGaucho", 0);
             tieneFacon = PlayerPrefs.GetInt("TieneFacon", 0) == 1;
+            confianza = PlayerPrefs.GetInt("ConfianzaCapataz", 0);
         }
         else
         {
@@ -28,29 +31,34 @@ public class PlayerManager : MonoBehaviour
     public void ModificarDinero(int cantidad)
     {
         dinero += cantidad;
-    
+
         PlayerPrefs.SetInt("DineroGaucho", dinero);
         PlayerPrefs.Save();
-    
-        // 🔥 ACTUALIZAR UI
+
+        ActualizarUI();
+    }
+
+    public void ModificarConfianza(int cantidad)
+    {
+        confianza += cantidad;
+
+        // opcional: limitar valores
+        confianza = Mathf.Clamp(confianza, 0, 100);
+
+        PlayerPrefs.SetInt("ConfianzaCapataz", confianza);
+        PlayerPrefs.Save();
+
+        Debug.Log("Confianza actual: " + confianza);
+    }
+
+   
+    void ActualizarUI()
+    {
         Stats stats = FindObjectOfType<Stats>();
         if (stats != null)
         {
             stats.dineroActual = dinero;
             stats.ActualizarTextoDinero();
-        }
-    }
-
-    public void ComprarFacon(int precio)
-    {
-        if (dinero >= precio && !tieneFacon)
-        {
-            dinero -= precio;
-            tieneFacon = true;
-
-            PlayerPrefs.SetInt("DineroGaucho", dinero);
-            PlayerPrefs.SetInt("TieneFacon", 1);
-            PlayerPrefs.Save();
         }
     }
 
