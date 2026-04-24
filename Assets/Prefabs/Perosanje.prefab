@@ -18,6 +18,7 @@ GameObject:
   - component: {fileID: 668769257486318660}
   - component: {fileID: 6368482160297167828}
   - component: {fileID: 3242033324426886314}
+  - component: {fileID: 2163059367246476082}
   m_Layer: 3
   m_Name: Perosanje
   m_TagString: Player
@@ -188,7 +189,7 @@ CircleCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7299207466443538561}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Density: 1
   m_Material: {fileID: 0}
@@ -286,3 +287,21 @@ MonoBehaviour:
   comida: 0
   textoAgua: {fileID: 0}
   textoComida: {fileID: 0}
+--- !u!114 &2163059367246476082
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7299207466443538561}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cd7a55f0c791dc5468509dbf32ec0e0c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rangoAtaque: 2
+  "da\xF1o": 10
+  cooldown: 0.5
+  capaEnemigos:
+    serializedVersion: 2
+    m_Bits: 128
