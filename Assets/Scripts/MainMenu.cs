@@ -14,7 +14,7 @@ public class MainMenu : MonoBehaviour
     {
          if (Input.anyKeyDown)
         {
-            SceneManager.LoadScene("SampleScene");
+            SceneManager.LoadScene("DiaUno");
         }
     }
 }

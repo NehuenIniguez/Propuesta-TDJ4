@@ -1,5 +1,7 @@
 using TMPro;
+using UnityEditor.SearchService;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class Stats : MonoBehaviour
@@ -55,7 +57,7 @@ public class Stats : MonoBehaviour
 
         if (sedActual >= maxSed)
         {
-            Time.timeScale = 0f;
+            SceneManager.LoadScene("GameOver");
         }
         Inventario inv = GetComponent<Inventario>();
 

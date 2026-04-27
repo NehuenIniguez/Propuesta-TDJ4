@@ -149,17 +149,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   estadoActual: 0
-  vaca: {fileID: 1657719210}
-  zonaCorral: {fileID: 547855107}
+  misionesDisponibles: []
   textoMisionUI: {fileID: 1571784154}
   panelDialogo: {fileID: 1946997030}
   textoDialogo: {fileID: 1244813569}
-  tiempoVisible: 4
-  velocidadEscritura: 0.02
-  tiempoEsperaFinal: 2
-  pagoPorMision: 100
   tiempoLimite: 30
   textoTimerUI: {fileID: 1008843387}
+  pagoPorMision: 100
+  diaActual: 1
 --- !u!4 &239822606
 Transform:
   m_ObjectHideFlags: 0
@@ -912,6 +909,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 66c0ee86780e41649b908e9e0fb93b19, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  misionVaca: {fileID: 0}
 --- !u!1 &549394205
 GameObject:
   m_ObjectHideFlags: 0
@@ -1545,11 +1543,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1 &1657719210 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4801680051815495122, guid: 775e804d46e90274588853d544615945, type: 3}
-  m_PrefabInstance: {fileID: 2073728617903804246}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1808546293
 GameObject:
   m_ObjectHideFlags: 0

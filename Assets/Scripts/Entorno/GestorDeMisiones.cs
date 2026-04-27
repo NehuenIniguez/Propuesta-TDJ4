@@ -1,54 +1,51 @@
 using System.Collections;
 using TMPro;
-using UnityEditor.SearchService;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.UI;
 
 public class GestorDeMisiones : MonoBehaviour
 {
-    // --- ESTADOS DE LA MISIÓN ---
-    public enum EstadoMision { NoEmpezada, EnProgreso, EsperandoPago, Finalizada }
+    public enum EstadoMision { NoEmpezada, EnProgreso, EsperandoPago }
     public EstadoMision estadoActual = EstadoMision.NoEmpezada;
 
-    [Header("Referencias de Objetos")]
-    public GameObject vaca;            // Objeto de la vaca en la escena
-    public GameObject zonaCorral;      // Objeto que detecta la vaca en el corral
-    public TextMeshProUGUI textoMisionUI;         // Opcional: Para mostrar la tarea en pantalla
+    [Header("Misiones")]
+    public MisionBase[] misionesDisponibles;
+    private MisionBase misionActual;
 
-    [Header("Sistema de Diálogos")]
-    public GameObject panelDialogo;    // El objeto que vas a activar/desactivar
-    public TextMeshProUGUI textoDialogo; // El texto que está DENTRO del panel
-    public float tiempoVisible = 4f;   // Cuánto tiempo dura el mensaje antes de irse
-    public float velocidadEscritura = 0.03f; // Tiempo entre cada letra
-    public float tiempoEsperaFinal = 3f;    // Cuánto se queda el texto al terminar de escribir
-    private Coroutine corrutinaEscritura;
+    [Header("UI")]
+    public TextMeshProUGUI textoMisionUI;
+    public GameObject panelDialogo;
+    public TextMeshProUGUI textoDialogo;
 
-    [Header("Economía")]
-    public int pagoPorMision = 100;
-    private Stats statsJugador; // Referencia al script de Stats
-    // --- REFERENCIA AL GAUCHO (JUGADOR) ---
-    private Movement movimientoJugador; // Reemplaza 'PlayerMovement' por el nombre de TU script de movimiento
-
-    [Header("Tiempo de Misión")]
+    [Header("Tiempo")]
     public float tiempoLimite = 30f;
     private float tiempoActual;
     private bool misionActiva = false;
 
-    [Header("UI Timer")]
+    [Header("Timer UI")]
     public TextMeshProUGUI textoTimerUI;
+
+    [Header("Economía")]
+    public int pagoPorMision = 100;
+    private Stats statsJugador;
+
+    [Header("Progresión")]
+    public int diaActual = 1;
+    private int misionesPorDia;
+    private int misionesCompletadas = 0;
+
+    private Coroutine corrutinaEscritura;
 
     void Start()
     {
-        // Al inicio, la vaca está quieta o desactivada, como prefieras
-        vaca.SetActive(false); 
-        ActualizarTextoUI("Habla con el Capataz");
-        
-        // Busca el script de movimiento del jugador por tag para pausarlo luego
+        misionesPorDia = Mathf.Clamp(diaActual, 1, 5);
+        misionesCompletadas = 0;
+
+        ActualizarTextoUI("Día " + diaActual + " - Habla con el Capataz");
+
         GameObject jugador = GameObject.FindGameObjectWithTag("Player");
         if (jugador != null)
         {
-            movimientoJugador = jugador.GetComponent<Movement>();
             statsJugador = jugador.GetComponent<Stats>();
         }
     }
@@ -59,42 +56,32 @@ public class GestorDeMisiones : MonoBehaviour
         {
             tiempoActual -= Time.deltaTime;
 
-            // ⏱️ Se acabó el tiempo
             if (tiempoActual <= 0f)
             {
-                PerderMision("¡Se te fue la vaca, inútil!");
+                PerderMision("¡Fallaste!");
             }
 
-            // 💀 Demasiado borracho = perder
-            if (statsJugador != null && statsJugador.GetPorcentajeEbriedad() >= 1f)
+            // 🔥 detectar si la misión se completó
+            if (misionActual != null && misionActual.EstaCompletada())
             {
-                PerderMision("¡Estás demasiado borracho para trabajar!");
+                estadoActual = EstadoMision.EsperandoPago;
+                misionActiva = false;
+
+                ActualizarTextoUI("Volvé con el Capataz");
             }
         }
 
+        // ⏱️ UI TIMER
         if (textoTimerUI != null)
         {
             textoTimerUI.gameObject.SetActive(misionActiva);
-            textoTimerUI.text = "Tiempo: " + Mathf.CeilToInt(tiempoActual);
-        
-            if (tiempoActual < 10f)
-                textoTimerUI.color = Color.red;
-            else if (tiempoActual < 20f)
-                textoTimerUI.color = Color.yellow;
-            else
-                textoTimerUI.color = Color.white;
-        }
 
-        if (EstadoMision.NoEmpezada == estadoActual)
-        {
-            if (textoTimerUI != null)
+            if (misionActiva)
             {
-                textoTimerUI.gameObject.SetActive(false);
+                textoTimerUI.text = "Tiempo: " + Mathf.CeilToInt(tiempoActual);
             }
         }
     }
-
-    // --- MÉTODOS PARA EL CAPATAZ (Se llaman desde su propio script) ---
 
     public void InteractuarConCapataz()
     {
@@ -103,15 +90,13 @@ public class GestorDeMisiones : MonoBehaviour
             case EstadoMision.NoEmpezada:
                 EmpezarMision();
                 break;
+
             case EstadoMision.EsperandoPago:
                 RecibirPago();
                 break;
+
             case EstadoMision.EnProgreso:
-                // El gaucho volvió a hablar antes de terminar la tarea
-                Conversacion("¿Ya trajiste la vaca? ¡No pierdas tiempo, che!");
-                break;
-            case EstadoMision.Finalizada:
-                Conversacion("Buen trabajo hoy. Mañana habrá más.");
+                Conversacion("Terminá la tarea primero.");
                 break;
         }
     }
@@ -119,139 +104,100 @@ public class GestorDeMisiones : MonoBehaviour
     void EmpezarMision()
     {
         estadoActual = EstadoMision.EnProgreso;
-        vaca.SetActive(true); // Aparece la vaca
+
+        // 🔥 elegimos misión al azar
+        misionActual = misionesDisponibles[Random.Range(0, misionesDisponibles.Length)];
+
+        misionActual.IniciarMision();
+
         tiempoActual = tiempoLimite;
         misionActiva = true;
-        // Aquí podrías mover la vaca a una posición inicial específica:
-        // vaca.transform.position = transform.position + Vector3.right * 2;
-        
-        Conversacion("¡Eh, Tucumano! Necesito que lleves esa vaca de allá al corral. ¡Apurate!");
-        ActualizarTextoUI("Lleva la vaca al corral");
+
+        ActualizarTextoUI(misionActual.descripcion);
     }
 
     void RecibirPago()
     {
-         estadoActual = EstadoMision.Finalizada;
-    misionActiva = false;
-
-    vaca.SetActive(false);
-
-    int pagoFinal = pagoPorMision;
-    int confianzaGanada = 10; // base
-
-    if (statsJugador != null)
-    {
-        float ebriedad = statsJugador.GetPorcentajeEbriedad();
-
-        // 🟠 Borracho → menos pago y menos confianza
-        if (ebriedad >= 0.5f && ebriedad < 0.75f)
+        if (misionActual != null)
         {
-            pagoFinal = Mathf.RoundToInt(pagoPorMision * 0.7f);
-            confianzaGanada = 5;
-        }
-        // 🔴 Muy borracho → casi nada y casi sin confianza
-        else if (ebriedad >= 0.75f)
-        {
-            pagoFinal = Mathf.RoundToInt(pagoPorMision * 0.3f);
-            confianzaGanada = 2;
+            misionActual.FinalizarMision();
         }
 
-        // ⏱️ BONUS por rapidez
-        float porcentajeTiempo = tiempoActual / tiempoLimite;
+        int pagoFinal = pagoPorMision;
 
-        if (porcentajeTiempo > 0.5f)
+        if (statsJugador != null)
         {
-            confianzaGanada += 5;
+            statsJugador.ModificarDinero(pagoFinal);
+            PlayerManager.instance.ModificarConfianza(10);
         }
 
-        // 💰 dinero
-        statsJugador.ModificarDinero(pagoFinal);
+        Conversacion("Cobrás $" + pagoFinal);
 
-        // 🤝 confianza
-        PlayerManager.instance.ModificarConfianza(confianzaGanada);
-    }
+        misionesCompletadas++;
 
-    Conversacion("Trabajo hecho. Cobrás $" + pagoFinal + " | Confianza +" + confianzaGanada);
-    ActualizarTextoUI("Misión Completada");
-
-    if (textoTimerUI != null)
-    {
-        textoTimerUI.text = "";
-    }
-
-    Invoke("IrALaPulperia", tiempoEsperaFinal + 1f);
-    }
-
-    // --- DETECCIÓN DE TAREA COMPLETADA (Se llama desde el Corral) ---
-
-    public void VacaLlegoAlCorral()
-    {
-        if (estadoActual == EstadoMision.EnProgreso)
+        if (misionesCompletadas >= misionesPorDia)
         {
-            estadoActual = EstadoMision.EsperandoPago;
-          
-            ActualizarTextoUI("Vuelve con el Capataz por tu paga");
+            FinDelDia();
         }
-        misionActiva = false;
-    }
-
-    // --- FUNCIONES AUXILIARES DE FEEDBACK ---
-
-    void Conversacion(string mensaje)
-    {
-        // Si ya se está escribiendo algo, lo detenemos para empezar el nuevo
-        if (corrutinaEscritura != null)
+        else
         {
-            StopCoroutine(corrutinaEscritura);
-        }
-        
-        corrutinaEscritura = StartCoroutine(EscribirMensaje(mensaje));
-    }
-    IEnumerator EscribirMensaje(string mensaje)
-    {
-        // 1. Limpiamos el texto y activamos el panel
-        textoDialogo.text = "";
-        panelDialogo.SetActive(true);
-
-        // 2. Recorremos el mensaje letra por letra
-        foreach (char letra in mensaje.ToCharArray())
-        {
-            textoDialogo.text += letra;
-            // Esperamos un poquito antes de la siguiente letra
-            yield return new WaitForSeconds(velocidadEscritura);
-        }
-
-        // 3. Una vez terminado, esperamos un tiempo para que el jugador lea
-        yield return new WaitForSeconds(tiempoEsperaFinal);
-
-        // 4. Desaparece el cartel
-        panelDialogo.SetActive(false);
-    }
-    void ActualizarTextoUI(string mensaje)
-    {
-        if (textoMisionUI != null)
-        {
-            textoMisionUI.text = mensaje;
+            estadoActual = EstadoMision.NoEmpezada;
+            ActualizarTextoUI("Otra más...");
         }
     }
-    void IrALaPulperia()
+
+    void FinDelDia()
     {
-        SceneManager.LoadScene("Pulperia");
+        Conversacion("Buen trabajo. Andá a la pulpería.");
+        Invoke("IrALaPulperia", 2f);
     }
+
     void PerderMision(string mensaje)
     {
         misionActiva = false;
         estadoActual = EstadoMision.NoEmpezada;
 
-        if (textoTimerUI != null)
+        if (misionActual != null)
         {
-            textoTimerUI.text = "";
+            misionActual.FinalizarMision();
         }
-        
-        vaca.SetActive(false);
-    
+
         Conversacion(mensaje);
-        ActualizarTextoUI("Fallaste la misión");
-        Time.timeScale = 0;
+        ActualizarTextoUI("Fallaste");
+    }
+
+    void Conversacion(string mensaje)
+    {
+        if (corrutinaEscritura != null)
+            StopCoroutine(corrutinaEscritura);
+
+        corrutinaEscritura = StartCoroutine(EscribirMensaje(mensaje));
+    }
+
+    IEnumerator EscribirMensaje(string mensaje)
+    {
+        textoDialogo.text = "";
+        panelDialogo.SetActive(true);
+
+        foreach (char letra in mensaje)
+        {
+            textoDialogo.text += letra;
+            yield return new WaitForSeconds(0.03f);
+        }
+
+        yield return new WaitForSeconds(2f);
+
+        panelDialogo.SetActive(false);
+    }
+
+    void ActualizarTextoUI(string mensaje)
+    {
+        if (textoMisionUI != null)
+            textoMisionUI.text = mensaje;
+    }
+
+    void IrALaPulperia()
+    {
+        SceneManager.LoadScene("Pulperia");
     }
 }

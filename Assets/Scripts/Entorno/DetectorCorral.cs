@@ -2,20 +2,13 @@ using UnityEngine;
 
 public class DetectorCorral : MonoBehaviour
 {
-    private GestorDeMisiones gestorMisiones;
+   public MisionVaca misionVaca;
 
-    void Start()
+    private void OnTriggerEnter2D(Collider2D other)
     {
-        gestorMisiones = FindObjectOfType<GestorDeMisiones>();
-    }
-
-    // Detectar si LA VACA entra en el corral
-    void OnTriggerEnter2D(Collider2D other)
-    {
-        if (other.CompareTag("Vaca")) // Asegúrate de darle el Tag "Vaca" a tu objeto vaca
+        if (other.CompareTag("Vaca"))
         {
-            Debug.Log("La vaca entró al corral.");
-            gestorMisiones.VacaLlegoAlCorral();
+            misionVaca.VacaEnCorral();
         }
     }
 }
