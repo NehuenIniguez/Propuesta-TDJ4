@@ -8,7 +8,7 @@ public class PlayerCombat : MonoBehaviour
 
     private float tiempoSiguienteAtaque = 0f;
 
-    public LayerMask capaEnemigos;
+    public LayerMask capaEnemigos; // ahora incluye enemigos + maleza
     private Stats stats;
 
     void Start()
@@ -37,33 +37,50 @@ public class PlayerCombat : MonoBehaviour
         {
             float ebriedad = stats.GetPorcentajeEbriedad();
 
-            // 🔴 muy borracho → podés fallar
             if (ebriedad > 0.7f && Random.value < 0.3f)
             {
                 Debug.Log("Fallaste el golpe por borracho");
                 return;
             }
 
-            // 🟠 borracho → menos daño
             if (ebriedad > 0.5f)
             {
                 multiplicador = 0.7f;
             }
         }
 
-        Collider2D[] enemigos = Physics2D.OverlapCircleAll(
+        Collider2D[] hits = Physics2D.OverlapCircleAll(
             transform.position,
             rangoAtaque,
             capaEnemigos
         );
 
-        foreach (Collider2D enemigo in enemigos)
+        foreach (Collider2D hit in hits)
         {
-            GauchoEnemy enemy = enemigo.GetComponent<GauchoEnemy>();
+            // ENEMIGOS
+            GauchoEnemy enemy = hit.GetComponent<GauchoEnemy>();
             if (enemy != null)
             {
                 int dañoFinal = Mathf.RoundToInt(daño * multiplicador);
                 enemy.RecibirDaño(dañoFinal);
+                continue;
+            }
+
+            //  MALEZA
+            if (hit.CompareTag("Maleza"))
+            {
+                if (!PlayerManager.instance.tieneFacon)
+                {
+                    Debug.Log("Necesitás el facón para cortar maleza");
+                    continue;
+                }
+
+                Maleza maleza = hit.GetComponent<Maleza>();
+
+                if (maleza != null)
+                {
+                    maleza.RecibirGolpe();
+                }
             }
         }
 

@@ -3,15 +3,30 @@ using UnityEngine.SceneManagement;
 
 public class PasoNivel : MonoBehaviour
 {
-    void OnTriggerEnter2D(Collider2D collision)
+    private bool jugadorDentro = false;
+
+    void Update()
     {
-        if (collision.CompareTag("Player"))
+        if (jugadorDentro && Input.GetKeyDown(KeyCode.S))
         {
-            Debug.Log("apreta enter para pasar de nivel");
-            if (Input.GetKeyDown(KeyCode.Return))
-            {
-                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
-            }
+            SceneManager.LoadScene("DiaDos");
+        }
+    }
+
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            jugadorDentro = true;
+            Debug.Log("Apretá S para pasar de nivel");
+        }
+    }
+
+    void OnTriggerExit2D(Collider2D other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            jugadorDentro = false;
         }
     }
 }

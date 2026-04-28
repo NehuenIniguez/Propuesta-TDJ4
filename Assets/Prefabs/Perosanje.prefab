@@ -304,4 +304,4 @@ MonoBehaviour:
   cooldown: 0.5
   capaEnemigos:
     serializedVersion: 2
-    m_Bits: 128
+    m_Bits: 384
