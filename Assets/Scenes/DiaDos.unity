@@ -210,6 +210,7 @@ MonoBehaviour:
   tiempoLimite: 30
   textoTimerUI: {fileID: 1008843387}
   pagoPorMision: 100
+  patron: {fileID: 0}
 --- !u!4 &239822606
 Transform:
   m_ObjectHideFlags: 0
@@ -317,7 +318,8 @@ GameObject:
   - component: {fileID: 369881617}
   - component: {fileID: 369881619}
   - component: {fileID: 369881618}
-  m_Layer: 0
+  - component: {fileID: 369881620}
+  m_Layer: 7
   m_Name: Capataz
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -488,6 +490,19 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &369881620
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 369881614}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d565375321ff86144a59fa6fd7fc8092, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  vulnerable: 0
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0

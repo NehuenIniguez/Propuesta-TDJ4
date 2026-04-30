@@ -716,7 +716,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fadeImage: {fileID: 1881711141}
-  duracionFade: 20
+  duracionFade: 5
 --- !u!4 &1527344335
 Transform:
   m_ObjectHideFlags: 0
@@ -767,8 +767,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -2.78, y: -19}
-  m_SizeDelta: {x: 891.91, y: 544.47}
+  m_AnchoredPosition: {x: 0.0014782, y: 1.6403}
+  m_SizeDelta: {x: 800, y: 503.19}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1862705071
 MonoBehaviour:
