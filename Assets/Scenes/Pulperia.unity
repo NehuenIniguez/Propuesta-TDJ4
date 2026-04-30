@@ -569,9 +569,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   panelTienda: {fileID: 1336575505}
-  precioAgua: 10
-  precioComida: 25
-  precioFacon: 500
+  precioAgua: 2
+  precioComida: 2
+  precioFacon: 2
 --- !u!1 &304784782
 GameObject:
   m_ObjectHideFlags: 0

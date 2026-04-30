@@ -1,61 +1,55 @@
 using UnityEngine;
 using System.Collections;
-using TMPro;
 
 public class Inventario : MonoBehaviour
 {
-    public int agua = 0;
-    public int comida = 0;
-
     private Stats stats;
-
-    [Header("UI")]
-    public TextMeshProUGUI textoAgua;
-    public TextMeshProUGUI textoComida;
 
     void Start()
     {
         stats = GetComponent<Stats>();
-        ActualizarUI(); // 🔥 importante al iniciar
     }
 
+    // 🔹 SOLO LECTURA (desde PlayerManager)
+    public int Agua => PlayerManager.instance.agua;
+    public int Comida => PlayerManager.instance.comida;
+
+    // ➕ AGREGAR
     public void AgregarAgua(int cantidad)
     {
-        agua += cantidad;
-        ActualizarUI();
+        PlayerManager.instance.ModificarAgua(cantidad);
+        Debug.Log("Agua actual: " + PlayerManager.instance.agua);
     }
 
     public void AgregarComida(int cantidad)
     {
-        comida += cantidad;
-        ActualizarUI();
+        PlayerManager.instance.ModificarComida(cantidad);
+        Debug.Log("Comida actual: " + PlayerManager.instance.comida);
     }
 
-    // 💧 AGUA
+    // 💧 USAR AGUA
     public bool UsarAgua()
     {
-        if (agua > 0 && stats != null)
+        if (PlayerManager.instance.agua > 0 && stats != null)
         {
-            agua--;
+            PlayerManager.instance.ModificarAgua(-1);
 
             stats.TomarAgua(40f, 25f);
 
-            ActualizarUI();
             return true;
         }
         return false;
     }
 
-    // 🍖 COMIDA (buff temporal)
+    // 🍖 USAR COMIDA
     public bool UsarComida()
     {
-        if (comida > 0 && stats != null)
+        if (PlayerManager.instance.comida > 0 && stats != null)
         {
-            comida--;
+            PlayerManager.instance.ModificarComida(-1);
 
             StartCoroutine(BuffComida());
 
-            ActualizarUI();
             return true;
         }
         return false;
@@ -70,19 +64,5 @@ public class Inventario : MonoBehaviour
         yield return new WaitForSeconds(10f);
 
         stats.velocidadBajadaEbriedad = original;
-    }
-
-    // 🧠 UI
-    void ActualizarUI()
-    {
-        if (textoAgua != null)
-        {
-            textoAgua.text = "Agua: " + agua;
-        }
-
-        if (textoComida != null)
-        {
-            textoComida.text = "Comida: " + comida;
-        }
     }
 }

@@ -72,8 +72,14 @@ public class GauchoEnemy : MonoBehaviour
 
     void Morir()
     {
-        Debug.Log("Gaucho muerto");
-        Destroy(gameObject);
+        MisionCombate mision = FindObjectOfType<MisionCombate>();
+    
+        if (mision != null)
+        {
+            mision.EnemigoDerrotado();
+        }
+    
+        gameObject.SetActive(false);
     }
 
     // 👀 debug visual

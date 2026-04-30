@@ -30,7 +30,6 @@ public class GestorDeMisiones : MonoBehaviour
     private Stats statsJugador;
 
     [Header("Progresión")]
-    public int diaActual = 1;
     private int misionesPorDia;
     private int misionesCompletadas = 0;
 
@@ -38,6 +37,9 @@ public class GestorDeMisiones : MonoBehaviour
 
     void Start()
     {
+        int diaActual = PlayerManager.instance.diaActual;
+
+        // 🔥 cantidad de misiones según día
         misionesPorDia = Mathf.Clamp(diaActual, 1, 5);
         misionesCompletadas = 0;
 
@@ -48,6 +50,8 @@ public class GestorDeMisiones : MonoBehaviour
         {
             statsJugador = jugador.GetComponent<Stats>();
         }
+
+        Debug.Log("Día actual: " + diaActual + " | Misiones: " + misionesPorDia);
     }
 
     void Update()
@@ -61,7 +65,7 @@ public class GestorDeMisiones : MonoBehaviour
                 PerderMision("¡Fallaste!");
             }
 
-            // 🔥 detectar si la misión se completó
+            // ✔ detectar misión completada
             if (misionActual != null && misionActual.EstaCompletada())
             {
                 estadoActual = EstadoMision.EsperandoPago;
@@ -71,7 +75,7 @@ public class GestorDeMisiones : MonoBehaviour
             }
         }
 
-        // ⏱️ UI TIMER
+        // ⏱️ TIMER UI
         if (textoTimerUI != null)
         {
             textoTimerUI.gameObject.SetActive(misionActiva);
@@ -105,7 +109,7 @@ public class GestorDeMisiones : MonoBehaviour
     {
         estadoActual = EstadoMision.EnProgreso;
 
-        // 🔥 elegimos misión al azar
+        // 🎯 elegir misión random
         misionActual = misionesDisponibles[Random.Range(0, misionesDisponibles.Length)];
 
         misionActual.IniciarMision();
@@ -135,6 +139,7 @@ public class GestorDeMisiones : MonoBehaviour
 
         misionesCompletadas++;
 
+        // 🔥 chequeo fin del día
         if (misionesCompletadas >= misionesPorDia)
         {
             FinDelDia();
@@ -148,6 +153,9 @@ public class GestorDeMisiones : MonoBehaviour
 
     void FinDelDia()
     {
+        // 🔥 SUBE EL DÍA
+        PlayerManager.instance.SiguienteDia();
+
         Conversacion("Buen trabajo. Andá a la pulpería.");
         Invoke("IrALaPulperia", 2f);
     }
