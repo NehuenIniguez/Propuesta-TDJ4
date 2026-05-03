@@ -19,6 +19,7 @@ GameObject:
   - component: {fileID: 6368482160297167828}
   - component: {fileID: 3242033324426886314}
   - component: {fileID: 2163059367246476082}
+  - component: {fileID: 4640736412229700282}
   m_Layer: 3
   m_Name: Perosanje
   m_TagString: Player
@@ -85,7 +86,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 2020503306651532673, guid: 35744b9da5d59064488e2b71d3ff6182, type: 3}
+  m_Sprite: {fileID: 214155770004553090, guid: 4ceb4e4566c8ee94fb50f1b7de863237, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -174,7 +175,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1.016, y: 1.36}
+    oldSize: {x: 1, y: 1.4375}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -283,10 +284,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4d8297b4b8973934cb94200c590604db, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  agua: 0
-  comida: 0
-  textoAgua: {fileID: 0}
-  textoComida: {fileID: 0}
 --- !u!114 &2163059367246476082
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -305,3 +302,25 @@ MonoBehaviour:
   capaEnemigos:
     serializedVersion: 2
     m_Bits: 384
+--- !u!95 &4640736412229700282
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7299207466443538561}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: e9c9331a6f2eb034e889fa7cedd0700a, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0

@@ -1,0 +1,494 @@
+fileFormatVersion: 2
+guid: 4ceb4e4566c8ee94fb50f1b7de863237
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -1255713531895812196
+    second: PokemonFireRedSheet2a_0
+  - first:
+      213: -7690600117745926700
+    second: PokemonFireRedSheet2a_1
+  - first:
+      213: 1694889979360239854
+    second: PokemonFireRedSheet2a_2
+  - first:
+      213: 5076056327802975826
+    second: PokemonFireRedSheet2a_3
+  - first:
+      213: 2578168540559696414
+    second: PokemonFireRedSheet2a_4
+  - first:
+      213: -8109925214670324020
+    second: PokemonFireRedSheet2a_5
+  - first:
+      213: 7655030426121058583
+    second: PokemonFireRedSheet2a_6
+  - first:
+      213: 214155770004553090
+    second: PokemonFireRedSheet2a_7
+  - first:
+      213: -7535811208951449114
+    second: PokemonFireRedSheet2a_8
+  - first:
+      213: -6886411436978959219
+    second: PokemonFireRedSheet2a_9
+  - first:
+      213: -8972982042773780553
+    second: PokemonFireRedSheet2a_10
+  - first:
+      213: -4679146743261791717
+    second: PokemonFireRedSheet2a_11
+  - first:
+      213: -4682532518277939130
+    second: PokemonFireRedSheet2a_12
+  - first:
+      213: -4171311022354858294
+    second: PokemonFireRedSheet2a_13
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 16
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 16384
+    resizeAlgorithm: 0
+    textureFormat: 12
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 1
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: PokemonFireRedSheet2a_0
+      rect:
+        serializedVersion: 2
+        x: 51
+        y: 23
+        width: 18
+        height: 22
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c9fe2bf123fc29ee0800000000000000
+      internalID: -1255713531895812196
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PokemonFireRedSheet2a_1
+      rect:
+        serializedVersion: 2
+        x: 85
+        y: 23
+        width: 18
+        height: 21
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4dd3d2080ff754590800000000000000
+      internalID: -7690600117745926700
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PokemonFireRedSheet2a_2
+      rect:
+        serializedVersion: 2
+        x: 134
+        y: 44
+        width: 16
+        height: 22
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ee0e221d475758710800000000000000
+      internalID: 1694889979360239854
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PokemonFireRedSheet2a_3
+      rect:
+        serializedVersion: 2
+        x: 152
+        y: 44
+        width: 16
+        height: 22
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 256f1960656c17640800000000000000
+      internalID: 5076056327802975826
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PokemonFireRedSheet2a_4
+      rect:
+        serializedVersion: 2
+        x: 171
+        y: 44
+        width: 16
+        height: 22
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e12e52fb0ae77c320800000000000000
+      internalID: 2578168540559696414
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PokemonFireRedSheet2a_5
+      rect:
+        serializedVersion: 2
+        x: 237
+        y: 23
+        width: 18
+        height: 21
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cce77984cf1c37f80800000000000000
+      internalID: -8109925214670324020
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PokemonFireRedSheet2a_6
+      rect:
+        serializedVersion: 2
+        x: 271
+        y: 23
+        width: 18
+        height: 22
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 719b0cd4d912c3a60800000000000000
+      internalID: 7655030426121058583
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PokemonFireRedSheet2a_7
+      rect:
+        serializedVersion: 2
+        x: 61
+        y: 1
+        width: 16
+        height: 23
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 28db8b5c985d8f200800000000000000
+      internalID: 214155770004553090
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PokemonFireRedSheet2a_8
+      rect:
+        serializedVersion: 2
+        x: 78
+        y: 1
+        width: 17
+        height: 23
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6e9ba04c1ab6b6790800000000000000
+      internalID: -7535811208951449114
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PokemonFireRedSheet2a_9
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 1
+        width: 17
+        height: 23
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d8c8ea9a84d8e60a0800000000000000
+      internalID: -6886411436978959219
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PokemonFireRedSheet2a_10
+      rect:
+        serializedVersion: 2
+        x: 103
+        y: 23
+        width: 18
+        height: 20
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7b7828c7f50997380800000000000000
+      internalID: -8972982042773780553
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PokemonFireRedSheet2a_11
+      rect:
+        serializedVersion: 2
+        x: 113
+        y: 1
+        width: 17
+        height: 22
+      alignment: 9
+      pivot: {x: 0.48903924, y: 0.47670934}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b1a74f304d4501fb0800000000000000
+      internalID: -4679146743261791717
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PokemonFireRedSheet2a_12
+      rect:
+        serializedVersion: 2
+        x: 129
+        y: 1
+        width: 17
+        height: 23
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 64004d6db7d440fb0800000000000000
+      internalID: -4682532518277939130
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PokemonFireRedSheet2a_13
+      rect:
+        serializedVersion: 2
+        x: 219
+        y: 22
+        width: 18
+        height: 21
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: acefdd8c9b68c16c0800000000000000
+      internalID: -4171311022354858294
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 28995b538413107438c5fb25533bcd2e
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      PokemonFireRedSheet2a_0: -1255713531895812196
+      PokemonFireRedSheet2a_1: -7690600117745926700
+      PokemonFireRedSheet2a_10: -8972982042773780553
+      PokemonFireRedSheet2a_11: -4679146743261791717
+      PokemonFireRedSheet2a_12: -4682532518277939130
+      PokemonFireRedSheet2a_13: -4171311022354858294
+      PokemonFireRedSheet2a_2: 1694889979360239854
+      PokemonFireRedSheet2a_3: 5076056327802975826
+      PokemonFireRedSheet2a_4: 2578168540559696414
+      PokemonFireRedSheet2a_5: -8109925214670324020
+      PokemonFireRedSheet2a_6: 7655030426121058583
+      PokemonFireRedSheet2a_7: 214155770004553090
+      PokemonFireRedSheet2a_8: -7535811208951449114
+      PokemonFireRedSheet2a_9: -6886411436978959219
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
